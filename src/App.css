@@ -1,0 +1,689 @@
+/* src/App.css (整理并包含阶段一、二、三的样式) */
+
+/* === Reset & Base Styles === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background-color: #0b0c10;
+  color: #e0e0e0;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === General Typography (Inspired by peterarendt.com - Phase 1) === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+}
+
+a {
+  color: #87ceeb;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-family: 'Inter', sans-serif; /* Default link font */
+}
+a:hover, a:focus {
+  color: #ffcc00;
+}
+a:focus-visible, .menu-toggle:focus-visible, button:focus-visible {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+p { /* Default paragraph styling */
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem; /* Base paragraph size, can be overridden by specific classes */
+  line-height: 1.7;
+  color: #c0c0c0;
+  margin-bottom: 1em;
+}
+
+/* Specific Typographic Classes (Phase 1) */
+.hero-title-main {
+  font-family: 'Oswald', sans-serif; /* 修改：将 'Syne' 替换为 'Oswald' */
+  font-weight: 700; /* Oswald Bold (确保您在Google Fonts中选择了这个字重) */
+  font-size: clamp(3.5rem, 12vw, 7.5rem); /* Oswald 字体本身较窄，可能需要微调字号以达到期望的视觉冲击力 */
+  line-height: 1.1; /* 由于字体特性改变，行高可能需要微调 */
+  margin-bottom: 0.4em;
+  color: #ffffff;
+  /* letter-spacing: -0.02em; */ /* Oswald 比较紧凑，通常不需要负字间距，甚至可以加一点点正的 */
+}
+.hero-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1rem, 2.2vw, 1.4rem); /* 尝试将副标题字号略微调小一点，您可以调整 */
+  font-weight: 400;
+  line-height: 1.5; /* 调整行高 */
+  /* max-width: 650px; */ /* 移除或增大这个 max-width，让它能利用右栏的宽度 */
+  margin: 0 0 1.5em 0; /* 调整下边距，确保与下方介绍文字有合适间距 */
+                         /* 左边距现在由其父容器 .hero-right-column 控制对齐 */
+  color: #e0e0e0;
+  text-align: left; /* 确保左对齐 */
+}
+.section-title-main { /* For prominent section titles like project names */
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  color: #ffffff;
+}
+.section-subtitle, .item-subtitle { /* For smaller subtitles under main titles */
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.85rem, 1.8vw, 1rem);
+  font-weight: 400;
+  color: #a0a0a0;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 1em;
+}
+.view-project-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  color: #e0e0e0;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #ffcc00;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  display: inline-block;
+}
+.view-project-link:hover {
+  color: #ffcc00;
+  border-color: #e0e0e0;
+}
+.hero-nav-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e0e0e0;
+  margin-bottom: 0.5em;
+}
+.hero-nav-line {
+  height: 1px;
+  background-color: #ffcc00;
+  width: 40px;
+  margin-bottom: 1.2em;
+}
+.about-subsection-line, .connect-line { /* Shared style for these lines */
+    height: 1px;
+    width: 40px;
+    margin-bottom: 1em;
+    background-color: #a0a0a0;
+}
+.hero-nav-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.hero-nav-links li a {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #a0a0a0;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.8em;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+/* Hover for .hero-nav-links li a is covered by general .nav-links a:hover */
+.hero-intro-text p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #c0c0c0;
+  margin-bottom: 1em;
+}
+.text-hover-zoom {
+    display: inline-block;
+    transition: transform 0.2s ease-out;
+}
+.text-hover-zoom:hover {
+    transform: scale(1.03);
+}
+
+/* === Layout Helpers === */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.content-section { /* For wrapped content blocks in HomePage, PortfolioPage, etc. */
+  padding: 60px 30px;
+  max-width: 1600px;
+  width: 100%;
+  margin: 40px auto; /* Vertical spacing, horizontal centering */
+  background-color: rgba(26, 27, 32, 0.5); /* Optional: slight background for sections */
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+section { /* For generic <section> tags if used directly, e.g. for full-width sections */
+  padding: 60px 20px; /* Default padding */
+  /* max-width: 1100px; */ /* Removing this to allow .content-section to control max-width */
+  margin: 0 auto;
+}
+
+/* === Component/Section Specific Styles === */
+
+/* Navbar */
+.navbar {
+  position: relative;
+  padding: 10px 20px; /* 当前：上下内边距20px，左右内边距30px */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  z-index: 1000;
+}
+
+.navbar-brand { /* 这是包裹品牌标识的 <a> 标签 */
+  text-decoration: none;
+  flex-shrink: 0; /* 防止在空间不足时被压缩 */
+  align-self: flex-start; /* 新增：使品牌标识在导航栏的交叉轴（垂直方向）上与顶部对齐 */
+                         /* 这会将其向上移动 */
+}
+
+.navbar-brand h1 {
+  /* ... (您已有的 .navbar-brand h1 样式保持不变) ... */
+  font-family: 'Syne', sans-serif;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.navbar-brand .brand-chinese {
+  /* ... (您已有的 .brand-chinese 样式，包括增大的字体) ... */
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem; 
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: -0.15em; 
+  margin-top: 0.4em;
+}
+
+.navbar-brand .brand-english {
+  /* ... (您已有的 .brand-english 样式，包括增大的字体) ... */
+  font-family: 'Inter', sans-serif;
+  font-size: 1.3rem; 
+  font-weight: 500;
+  color: #a0a0a0;
+  letter-spacing: 0.03em;
+  margin-top: 0.2em;
+}
+.menu-toggle {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 1001;
+  display: block;
+  padding: 5px;
+}
+.nav-links {
+  position: absolute;
+  top: 70px;
+  right: 30px;
+  background: rgba(28, 28, 30, 0.97);
+  border-radius: 8px;
+  padding: 15px 20px;
+  display: none;
+  flex-direction: column;
+  text-align: right;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  width: max-content;
+}
+.nav-links.open { display: flex; }
+.nav-links ul { list-style: none; padding-left: 0; }
+.nav-links li { margin: 12px 0; }
+.nav-links a { /* font-family: 'Inter' inherited from general 'a' or specific .nav-links a rule */
+  color: #f0f0f0;
+  text-decoration: none;
+  font-weight: 500; /* Inter Medium */
+  font-size: 1rem;
+  padding: 8px 5px;
+  display: block;
+}
+.nav-links a:hover, .nav-links a:focus,
+.nav-links a.active-link {
+  color: #ffcc00;
+}
+
+/* New Hero Section Layout (Phase 2) */
+.homepage-main .hero-section-peterarendt { /* More specific selector for homepage hero */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 40px;
+  box-sizing: border-box;
+  text-align: left;
+  /* background-color: #0A0A0A; */ /* Example very dark background if no image */
+}
+.hero-content-wrapper {
+  max-width: 1200px; /* 保留最大宽度限制 */
+  /* width: 100%; */  /* <--- 尝试注释掉或删除这一行 */
+  margin: 0 auto;    /* 使其在父容器中水平居中，并根据 max-width 调整大小 */
+  /* 如果其父元素 .hero-section-peterarendt 不是 flex 容器或者没有 align-items: center，
+     则 margin: 0 auto 对于块级元素是标准的居中方法 */
+  box-sizing: border-box; /* 确保 padding/border 不会增加 deklarisierter width/max-width */
+}
+
+/* 同时，确保 .hero-bottom-layout (hero-content-wrapper的子元素) 的宽度表现正常 */
+.hero-bottom-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; /* 尝试减小左右栏的间距，为右栏腾出更多空间 */
+  margin-top: 40px; /* 调整大标题/副标题与下方分栏布局之间的间距 */
+  width: 100%;
+}
+.hero-left-column {
+  flex: 1 1 220px; /* 左栏基础宽度可以设小一些，例如220px，但允许增长 */
+  min-width: 180px; /* 最小宽度 */
+  /* max-width: 300px; */ /* 如果之前有，可以保留或调整 */
+  box-sizing: border-box;
+}
+
+.hero-right-column {
+  flex: 3 1 65%;   /* 增加右栏的 flex-grow 比例 (例如到3)，让它占据更多空间 */
+  min-width: 320px; /* 确保右栏有足够的最小宽度 */
+  box-sizing: border-box;
+  display: flex; /* 新增: 使内部的 .hero-subtitle 和 .hero-intro-text 垂直排列 */
+  flex-direction: column; /* 新增 */
+}
+
+.hero-intro-text {
+  column-count: 2; /* 保持两列文本 */
+  column-gap: 30px;
+  /* width: 100%; */ /* 它会自动填充 .hero-right-column */
+}
+.hero-intro-text p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #c0c0c0;
+  margin-bottom: 1em;
+  /* break-inside: avoid-column; */ /* 可选：防止段落在列尾被切断得太难看 */
+}
+
+/* Old .hero class (if still used elsewhere or as fallback) */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  padding: 40px 20px;
+  color: white;
+  background-size: cover;
+  background-position: center;
+}
+/* .hero h2 styles: font-family 'Syne' from h1-h6. Specific font-weight 800 below */
+.hero h2 {
+  font-size: clamp(2.5rem, 6vw, 3rem); /* This is the old hero title size */
+  margin-bottom: 25px;
+  font-weight: 800; /* Specific for old hero title if not using .hero-title-main */
+}
+.hero p { /* Old hero subtitle style */
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  max-width: 650px;
+  margin: 0 auto 30px auto;
+  color: #e0e0e0;
+  line-height: 1.8;
+}
+
+/* Call to Action Button */
+.cta-button {
+  font-family: 'Inter', sans-serif;
+  background-color: #ffcc00;
+  color: #0b0c10;
+  padding: 12px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 700; /* Bolder CTA text */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+}
+.cta-button:hover, .cta-button:focus {
+  background-color: #ffb700;
+  transform: translateY(-2px);
+  color: #0b0c10;
+}
+
+/* Section Title (General, if not using .section-title-main) */
+.section-title { /* font-family 'Syne' from h1-h6 or specific .section-title rule */
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 30px;
+  border-bottom: 3px solid #ffcc00;
+  display: inline-block;
+  padding-bottom: 8px;
+  color: #ffffff;
+}
+
+/* Homepage Featured Work Section (Phase 3) */
+.work-section-peterarendt {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.featured-project-item {
+  margin-bottom: 100px;
+  position: relative;
+}
+.featured-project-item:last-child {
+  margin-bottom: 60px;
+}
+.project-item-section-indicator {
+  position: absolute;
+  top: -30px;
+  right: 0px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+.project-item-section-indicator span {
+  margin-left: 12px;
+}
+.project-item-section-indicator .indicator-line-short {
+  height: 1px;
+  width: 20px;
+  background-color: #555;
+  margin-right: 12px;
+}
+.project-item-layout {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.featured-project-item:nth-child(odd) .project-item-layout { flex-direction: row; }
+.featured-project-item:nth-child(even) .project-item-layout { flex-direction: row-reverse; }
+.project-item-image {
+  flex: 1 1 50%;
+  min-width: 280px;
+}
+.project-item-image img {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.project-item-details {
+  flex: 1 1 45%;
+  min-width: 280px;
+  text-align: left;
+  padding-left: 20px;
+}
+.featured-project-item:nth-child(even) .project-item-details {
+  padding-left: 0;
+  padding-right: 20px;
+  text-align: right;
+}
+.project-title { /* Uses .section-title-main for font, size, color */
+  margin-bottom: 0.4em !important;
+  line-height: 1.15 !important;
+}
+.project-subtitle { /* Uses .item-subtitle for font, size, color */
+  margin-bottom: 2.2em !important;
+  color: #b5b5b5 !important;
+}
+
+/* Portfolio Page Grid (distinct from homepage featured work) */
+.portfolio.content-section .portfolio-grid { /* More specific selector for /portfolio page */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 30px;
+}
+.portfolio-item { /* Styles for items on the /portfolio page grid */
+  background-color: #1a1b20;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.portfolio-item:hover, .portfolio-item:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.portfolio-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 2px solid #ffcc00;
+}
+.portfolio-item-content { padding: 20px; }
+.portfolio-item-content h3 { /* font-family 'Syne' from h1-h6 */
+  margin-bottom: 10px; font-size: 1.3rem; color: #ffffff;
+}
+.portfolio-item-content h3 a { color: #ffffff; }
+.portfolio-item-content h3 a:hover { color: #ffcc00; }
+.portfolio-item-content p { /* font-family 'Inter' from general p or specific class */
+  font-size: 0.95rem; color: #a0a0a0; line-height: 1.6; margin-bottom: 0;
+}
+
+/* Blog List / Preview */
+.blog-section { /* Specific to blog sections if needed */ }
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+.blog-post-summary {
+  background-color: #1a1b20;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+.blog-post-summary:hover, .blog-post-summary:focus-within {
+  transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.blog-post-summary img { width: 100%; height: 180px; object-fit: cover; display: block; }
+.blog-post-summary-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+.blog-post-summary-content h3 { /* font-family 'Syne' from h1-h6 */
+  margin-bottom: 10px; font-size: 1.3rem; color: #ffffff;
+}
+.blog-post-summary-content h3 a { color: #ffffff; }
+.blog-post-summary-content h3 a:hover { color: #ffcc00; }
+.blog-post-summary-content p.post-meta { /* font-family 'Inter' from general p or specific class */
+   font-size: 0.85em; color: #aaa; margin-bottom: 10px;
+}
+.blog-post-summary-content p { /* font-family 'Inter' from general p or specific class */
+  font-size: 0.95rem; color: #a0a0a0; line-height: 1.6; margin-bottom: 15px; flex-grow: 1;
+}
+.blog-post-summary-content .read-more-link { /* font-family 'Inter' from general 'a' */
+  display: inline-block; color: #87ceeb; font-weight: 500; text-decoration: none; margin-top: auto;
+}
+.blog-post-summary-content .read-more-link:hover,
+.blog-post-summary-content .read-more-link:focus {
+  color: #ffcc00; text-decoration: underline;
+}
+
+/* Blog Post Detail Page */
+.blog-post-full { /* Wrapper for single blog post content */ }
+.blog-post-full .post-header h1 { /* font-family 'Syne' from h1-h6 */
+  font-size: clamp(2rem, 5vw, 3rem); color: #ffffff; margin-bottom: 15px;
+  border-bottom: 3px solid #ffcc00; display: inline-block; padding-bottom: 8px;
+}
+.blog-post-full .post-meta { /* font-family 'Inter' from specific class or p */
+  font-size: 0.9rem; color: #888; margin-bottom: 30px;
+}
+.blog-post-full .post-content { /* font-family 'Inter' from body/p */
+  font-size: 1.1rem; line-height: 1.8; color: #c0c0c0;
+}
+.blog-post-full .post-content h2, /* font-family 'Syne' from h1-h6 */
+.blog-post-full .post-content h3,
+.blog-post-full .post-content h4 {
+  margin-top: 30px; margin-bottom: 15px; color: #f0f0f0; font-weight: 600;
+}
+.blog-post-full .post-content p { margin-bottom: 20px; }
+.blog-post-full .post-content ul, .blog-post-full .post-content ol { margin-left: 20px; margin-bottom: 20px; padding-left: 1em; }
+.blog-post-full .post-content blockquote { border-left: 4px solid #ffcc00; padding-left: 20px; margin: 20px 0; font-style: italic; color: #a0a0a0; }
+.blog-post-full .post-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 20px 0; display: block; }
+.blog-post-full .post-content code { background-color: #1e1f24; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; color: #d0d0d0; }
+.blog-post-full .post-content pre { background-color: #1e1f24; padding: 15px; border-radius: 4px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; color: #d0d0d0; margin-bottom: 20px; }
+
+/* Resume Section (Placeholders) */
+.resume-section { /* 具体样式待添加 */ }
+.resume-category { margin-bottom: 40px; }
+.resume-category-title { font-size: 1.8rem; color: #ffffff; border-bottom: 2px solid #ffcc00; padding-bottom: 8px; margin-bottom: 20px; display: inline-block; }
+.resume-item { margin-bottom: 20px; }
+.resume-item h3 { font-size: 1.3rem; color: #f0f0f0; margin-bottom: 5px; }
+.resume-item .subheading { font-size: 1rem; color: #b0b0b0; margin-bottom: 10px; font-style: italic; }
+.resume-item ul { list-style: disc; margin-left: 20px; padding-left: 1em; color: #c0c0c0; }
+.resume-item ul li { margin-bottom: 8px; }
+
+/* Contact Section (Homepage) */
+.contact-section .section-title { /* .section-title styling already defined */
+  display: block; text-align: center;
+}
+.contact-list {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 25px 40px; max-width: 750px; margin: 30px auto;
+}
+.contact-item {
+  display: flex; align-items: center; justify-content: flex-start;
+  gap: 10px; font-size: 0.9rem; padding: 5px 0;
+}
+.contact-icon { font-size: 1.7em; flex-shrink: 0; }
+.email-icon {
+  color: #87ceeb; /* 您之前的设置，或选择其他 */
+}
+.xiaohongshu-icon {
+  color: #FF2442; /* 小红书的品牌红色 */
+}
+.douyin-icon {
+  /* 抖音图标通常是黑白的，或者有霓虹色调。这里用一个中性色或您的强调色 */
+  color: #FE2C55; /* 抖音/TikTok 标志性的粉红色调，或者用 #ffffff, #ffcc00 */
+}
+.instagram-icon {
+  color: #E1306C; /* Instagram 粉 */
+}
+.contact-text { /* font-family 'Inter' from 'a' tag */
+  color: #e0e0e0; text-decoration: none; white-space: nowrap;
+}
+.contact-text:hover { color: #ffcc00; text-decoration: underline; }
+.contact-qr-code { width: 100px; height: 100px; margin-left: 15px; border: 1px solid #444; }
+
+/* Other Sections (Placeholders) */
+.personal-updates { /* 具体样式待添加 */ }
+.personal-updates h3 { color: #ffffff; margin-bottom: 10px; }
+.personal-updates p { color: #b0b0b0; }
+.video-showcase-section { /* 具体样式待添加 */ }
+.video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+.video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+.video-wrapper iframe, .video-wrapper video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.video-caption { text-align: center; font-size: 0.9rem; color: #a0a0a0; margin-top: 10px; }
+.social-links { list-style: none; padding: 0; display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+.social-links li a { color: #a0a0a0; font-size: 1.5rem; transition: color 0.3s ease, transform 0.3s ease; }
+.social-links li a:hover, .social-links li a:focus { color: #ffcc00; transform: scale(1.1); }
+
+/* Footer */
+.footer { /* font-family 'Inter' already applied via inheritance or specific rule */
+  margin-top: auto; text-align: center; padding: 30px 20px;
+  background-color: #08090D; font-size: 0.9rem; color: #777;
+}
+.footer a { color: #999; }
+.footer a:hover, .footer a:focus { color: #ffcc00; }
+
+/* === Media Queries (Responsive Design) === */
+@media (max-width: 768px) { /* For smaller screens, hero text layout changes */
+  .hero-intro-text { column-count: 1; }
+  .hero-bottom-layout {
+    flex-direction: column;
+    margin-top: 30px; /* 调整小屏幕时间距 */
+    gap: 20px; /* 调整小屏幕时间距 */
+  }
+  .hero-right-column {
+    /* 在堆叠时，副标题和介绍文字自然是垂直排列的，无需特殊 flex 设置 */
+  }
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem); /* 小屏幕上副标题可以再小一点 */
+    text-align: center; /* 如果希望在堆叠时副标题也居中 */
+    margin-left: auto;  /* 配合 text-align: center 实现块的居中（如果其有宽度）*/
+    margin-right: auto;
+    max-width: 90%; /* 小屏幕上限制最大宽度 */
+  }
+  .hero-section-peterarendt .hero-title-main, /* Target new hero specifically */
+  .hero-section-peterarendt .hero-subtitle { text-align: center; }
+  .hero-left-column { text-align: center; margin-bottom: 30px; }
+  .hero-nav-line { margin-left: auto; margin-right: auto; }
+
+  /* Project items stack vertically */
+  .project-item-layout,
+  .featured-project-item:nth-child(even) .project-item-layout {
+    flex-direction: column; align-items: center; gap: 25px; text-align: center;
+  }
+  .project-item-image, .project-item-details {
+    flex-basis: auto; width: 100%; max-width: 500px;
+    padding-left: 0; padding-right: 0; text-align: center;
+  }
+  .project-item-image { margin-bottom: 15px; }
+  .project-item-section-indicator { position: relative; top: auto; right: auto; margin-bottom: 30px; justify-content: center; }
+  .featured-project-item { margin-bottom: 70px; }
+}
+
+@media (min-width: 768px) { /* Desktop Navigation */
+  .menu-toggle { display: none; }
+  .nav-links {
+    position: static; display: flex !important; flex-direction: row;
+    align-items: center; background: none; box-shadow: none;
+    padding: 0; width: auto;
+  }
+  .nav-links li { margin: 0 0 0 25px; }
+  .nav-links li:first-child { margin-left: 0; }
+  .nav-links a { /* font-family 'Inter' from general 'a' or specific rule */
+    color: #e0e0e0; font-size: 1rem; font-weight: 500; padding: 5px 0;
+  }
+  .nav-links a:hover, .nav-links a:focus, .nav-links a.active-link { color: #ffcc00; }
+}
+
+@media (min-width: 1200px) { /* Larger Desktop Tweaks */
+  section, .content-section { padding: 80px 30px; }
+  .portfolio.content-section .portfolio-grid, /* Be specific for portfolio page grid */
+  .blog-grid, .video-grid { gap: 40px; }
+}
+
+@media (min-width: 1600px) { /* Very Wide Screens */
+  .content-section { max-width: 1800px; padding: 80px 40px; }
+  .portfolio.content-section .portfolio-grid, /* Be specific for portfolio page grid */
+  .work-section-peterarendt .featured-project-item .project-item-layout, /* For homepage featured work */
+  .blog-grid { /* This would apply to blog list on blog page and homepage preview if it uses .blog-grid */
+    /* Consider if different grid item sizes are needed for these different contexts on very wide screens */
+    /* For example, homepage featured items might stay larger, while portfolio page grid might get more columns */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
