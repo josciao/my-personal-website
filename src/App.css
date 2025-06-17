@@ -687,3 +687,167 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 }
+
+/* --- Project Detail Page Styles (上文下图布局 - 最终修正版) --- */
+.project-detail-page {
+  padding: 80px 0; /* 上下留白 */
+}
+
+.project-text-section {
+  max-width: 800px;
+  margin: 0 auto 80px auto;
+  padding: 0 20px; /* 左右留白 */
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.project-detail-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.6em;
+  color: #ffffff;
+}
+
+.project-detail-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: #a0a0a0;
+  margin-bottom: 2.5em;
+  font-style: italic;
+}
+
+.project-text-section p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #c0c0c0;
+  margin-bottom: 1.5em;
+}
+
+/* --- 图片展示区域样式 (关键修正) --- */
+.project-image-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 创建两列等宽网格 */
+  gap: 20px; /* 图片之间的间距 */
+  max-width: 1600px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.project-image-wrapper {
+  /* 这个容器本身只作为网格项存在 */
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  height: auto; /* 让高度自动适应宽度，保持原始比例 */
+  display: block;
+  border-radius: 4px;
+}
+@media (max-width: 768px) {
+  .project-text-section {
+    max-width: 90%; /* 小屏幕上文字区域宽度可以更大一些 */
+    margin-bottom: 60px; /* 减小与图片区的间距 */
+  }
+  .project-detail-title {
+    font-size: clamp(2rem, 7vw, 2.8rem); /* 调整标题大小 */
+  }
+  .project-image-wrapper {
+    width: 100%; /* 小屏幕上图片可以撑满 */
+    padding: 0 10px; /* 避免图片紧贴屏幕边缘 */
+    box-sizing: border-box;
+  }
+}
+
+/* --- Project Detail Page Styles (上文下图布局) --- */
+/* (将此代码块添加到您 App.css 的末尾) */
+
+.project-detail-page {
+  /* 页面总容器，设置上下内边距来创造呼吸感 */
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+
+/* 文字描述区域的样式 */
+.project-text-section {
+  max-width: 800px; /* 限制文字区域的最大宽度，保证阅读舒适性 */
+  margin: 0 auto 80px auto; /* 上下外边距，左右自动居中。底部80px用于和图片区隔开 */
+  text-align: left;    /* 文本左对齐 */
+}
+
+.project-detail-title {
+  font-family: 'Syne', sans-serif; /* 使用您的标题字体 */
+  font-size: clamp(2.2rem, 5vw, 3.5rem); /* 为详情页标题设置合适的大小 */
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.6em; /* 标题和副标题/正文的间距 */
+  color: #ffffff; /* 保持您的标题颜色 */
+}
+
+.project-detail-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: #a0a0a0; /* 副标题颜色可以柔和一些 */
+  margin-bottom: 2.5em; /* 与下方正文的间距 */
+  font-style: italic; /* 可选：副标题用斜体 */
+}
+
+.project-text-section p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.8; /* 稍大的行高提升阅读体验 */
+  color: #c0c0c0;
+  margin-bottom: 1.5em; /* 段落之间的间距 */
+}
+.project-text-section p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* 图片展示区域的样式 */
+.project-image-gallery {
+  display: grid; /* 修改：使用Grid布局 */
+  grid-template-columns: repeat(2, 1fr); /* 修改：创建两列等宽的网格 */
+  gap: 20px; /* 修改：设置图片之间的水平和垂直间距 */
+  max-width: 1600px; /* 修改：限制整个图片画廊的最大宽度 */
+  width: 90%; /* 修改：画廊宽度为页面宽度的90% */
+  margin: 0 auto; /* 修改：使整个画廊居中 */
+}
+
+.project-image-wrapper {
+  /* 移除之前的宽度和外边距设置，因为现在由Grid容器控制 */
+  width: 100%; /* 图片包装器宽度占满其网格单元格 */
+}
+
+.project-image-wrapper img {
+  width: 100%; /* 图片宽度撑满其容器 */
+  height: 100%; /* 修改：高度也设为100% */
+  object-fit: cover; /* 修改：确保图片填充容器并保持比例，可能会裁剪 */
+  display: block; /* 移除图片下方的微小空隙 */
+  aspect-ratio: 4 / 3; /* 新增：强制图片的宽高比为4:3，确保所有图片大小一致 */
+  border-radius: 4px; /* 可选：给图片加个小圆角 */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* 可选：给图片加一点阴影 */
+}
+
+/* 为项目详情页添加响应式调整 */
+@media (max-width: 768px) {
+  .project-text-section {
+    max-width: 90%; /* 小屏幕上文字区域宽度可以更大一些 */
+    margin-bottom: 60px; /* 减小与图片区的间距 */
+  }
+  .project-detail-title {
+    font-size: clamp(2rem, 7vw, 2.8rem); /* 调整标题大小 */
+  }
+  .project-image-gallery {
+    grid-template-columns: 1fr; /* 修改：在小屏幕上变为单列显示 */
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+  .project-image-wrapper {
+    width: 100%; 
+    padding: 0; /* 在这里不再需要padding */
+  }
+}
+
