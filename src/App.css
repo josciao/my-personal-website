@@ -420,7 +420,7 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
 }
 .project-item-layout {
   display: flex;
-  align-items: center;
+  align-items: flex;
   gap: 50px;
 }
 .featured-project-item:nth-child(odd) .project-item-layout { flex-direction: row; }
@@ -728,23 +728,39 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
 /* --- 图片展示区域样式 (关键修正) --- */
 .project-image-gallery {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 创建两列等宽网格 */
+  grid-template-columns: repeat(2, 1fr); /* 保持两列等宽的网格 */
   gap: 20px; /* 图片之间的间距 */
   max-width: 1600px;
   width: 90%;
   margin: 0 auto;
+  align-items: start; /* 让不同高度的图片从顶部对齐 */
 }
 
 .project-image-wrapper {
-  /* 这个容器本身只作为网格项存在 */
+  /* 这个容器现在只作为网格项，不需要特定样式 */
+  width: 100%; 
 }
 
 .project-image-wrapper img {
-  width: 100%;
-  height: auto; /* 让高度自动适应宽度，保持原始比例 */
-  display: block;
-  border-radius: 4px;
+  width: 100%; /* 关键：图片宽度撑满其所在的网格单元 */
+  height: auto !important; /* 关键修正：使用 !important 强制让高度自动调整，覆盖其他任何冲突样式 */
+  display: block; /* 保持，移除图片下方的微小空隙 */
+  border-radius: 4px; /* 保留圆角 */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* 保留阴影 */
+  /* 确保没有 max-height 或其他限制高度的属性 */
+  max-height: none !important; 
 }
+
+/* ... 其他响应式和样式 ... */
+@media (max-width: 768px) {
+  /* ... */
+  .project-image-gallery {
+    grid-template-columns: 1fr; /* 小屏幕上变为单列显示 */
+    /* ... */
+  }
+  /* ... */
+}
+
 @media (max-width: 768px) {
   .project-text-section {
     max-width: 90%; /* 小屏幕上文字区域宽度可以更大一些 */
@@ -807,34 +823,31 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
 
 /* 图片展示区域的样式 */
 .project-image-gallery {
-  display: grid; /* 修改：使用Grid布局 */
-  grid-template-columns: repeat(2, 1fr); /* 修改：创建两列等宽的网格 */
-  gap: 20px; /* 修改：设置图片之间的水平和垂直间距 */
-  max-width: 1600px; /* 修改：限制整个图片画廊的最大宽度 */
-  width: 90%; /* 修改：画廊宽度为页面宽度的90% */
-  margin: 0 auto; /* 修改：使整个画廊居中 */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 创建两列等宽的网格 */
+  gap: 20px; /* 图片之间的间距 */
+  max-width: 1600px;
+  width: 90%;
+  margin: 0 auto; /* 使整个画廊居中 */
+  align-items: start; /* 让不同高度的图片从顶部对齐 */
 }
 
-.project-image-wrapper {
-  /* 移除之前的宽度和外边距设置，因为现在由Grid容器控制 */
-  width: 100%; /* 图片包装器宽度占满其网格单元格 */
+.gallery-image-item {
+  /* 这个 motion.div 现在是网格项，它本身不需要特定样式 */
 }
 
-.project-image-wrapper img {
-  width: 100%; /* 图片宽度撑满其容器 */
-  height: 100%; /* 修改：高度也设为100% */
-  object-fit: cover; /* 修改：确保图片填充容器并保持比例，可能会裁剪 */
-  display: block; /* 移除图片下方的微小空隙 */
-  aspect-ratio: 4 / 3; /* 新增：强制图片的宽高比为4:3，确保所有图片大小一致 */
-  border-radius: 4px; /* 可选：给图片加个小圆角 */
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* 可选：给图片加一点阴影 */
+.gallery-image-item img {
+  width: 100%;       /* 图片宽度撑满其所在的网格列 */
+  height: auto;      /* 高度自动调整，以保持图片的原始宽高比 */
+  display: block;    /* 移除图片下方的额外空隙 */
+  border-radius: 4px;/* 可选：美观的圆角 */
 }
 
 /* 为项目详情页添加响应式调整 */
 @media (max-width: 768px) {
   .project-text-section {
-    max-width: 90%; /* 小屏幕上文字区域宽度可以更大一些 */
-    margin-bottom: 60px; /* 减小与图片区的间距 */
+    max-width: 90%;
+    margin-bottom: 50px;
   }
   .project-detail-title {
     font-size: clamp(2rem, 7vw, 2.8rem); /* 调整标题大小 */
@@ -849,5 +862,54 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
     width: 100%; 
     padding: 0; /* 在这里不再需要padding */
   }
+  .project-detail-page {
+    padding-top: 60px;
+  }
+  .project-text-section {
+    max-width: 90%;
+    margin-bottom: 50px;
+  }
 }
 
+.project-detail-page {
+  /* 页面总容器，设置上下内边距来创造呼吸感 */
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+
+/* 文字描述区域的样式 */
+.project-text-section {
+  max-width: 800px; /* 限制文字区域的最大宽度，保证阅读舒适性 */
+  margin: 0 auto 80px auto; /* 上下外边距，左右自动居中。底部80px用于和图片区隔开 */
+  padding: 0 20px; /* 为文字区增加一些左右内边距 */
+  box-sizing: border-box;
+  text-align: left;    /* 文本左对齐 */
+}
+
+.project-detail-title {
+  font-family: 'Syne', sans-serif; /* 使用您的标题字体 */
+  font-size: clamp(2.2rem, 5vw, 3.5rem); /* 为详情页标题设置合适的大小 */
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.6em;
+  color: #ffffff;
+}
+
+.project-detail-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: #a0a0a0;
+  margin-bottom: 2.5em;
+  font-style: italic;
+}
+
+.project-text-section p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #c0c0c0;
+  margin-bottom: 1.5em;
+}
+.project-text-section p:last-child {
+  margin-bottom: 0;
+}
