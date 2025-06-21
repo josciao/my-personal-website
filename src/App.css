@@ -69,7 +69,7 @@ p { /* Default paragraph styling */
   line-height: 1.5; /* 调整行高 */
   /* max-width: 650px; */ /* 移除或增大这个 max-width，让它能利用右栏的宽度 */
   margin: 0 0 1.5em 0; /* 调整下边距，确保与下方介绍文字有合适间距 */
-                         /* 左边距现在由其父容器 .hero-right-column 控制对齐 */
+                          /* 左边距现在由其父容器 .hero-right-column 控制对齐 */
   color: #e0e0e0;
   text-align: left; /* 确保左对齐 */
 }
@@ -121,10 +121,10 @@ p { /* Default paragraph styling */
   margin-bottom: 1.2em;
 }
 .about-subsection-line, .connect-line { /* Shared style for these lines */
-    height: 1px;
-    width: 40px;
-    margin-bottom: 1em;
-    background-color: #a0a0a0;
+  height: 1px;
+  width: 40px;
+  margin-bottom: 1em;
+  background-color: #a0a0a0;
 }
 .hero-nav-links ul {
   list-style: none;
@@ -150,11 +150,11 @@ p { /* Default paragraph styling */
   margin-bottom: 1em;
 }
 .text-hover-zoom {
-    display: inline-block;
-    transition: transform 0.2s ease-out;
+  display: inline-block;
+  transition: transform 0.2s ease-out;
 }
 .text-hover-zoom:hover {
-    transform: scale(1.03);
+  transform: scale(1.03);
 }
 
 /* === Layout Helpers === */
@@ -195,7 +195,7 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
   text-decoration: none;
   flex-shrink: 0; /* 防止在空间不足时被压缩 */
   align-self: flex-start; /* 新增：使品牌标识在导航栏的交叉轴（垂直方向）上与顶部对齐 */
-                         /* 这会将其向上移动 */
+                          /* 这会将其向上移动 */
 }
 
 .navbar-brand h1 {
@@ -282,7 +282,7 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
 .hero-content-wrapper {
   max-width: 1200px; /* 保留最大宽度限制 */
   /* width: 100%; */  /* <--- 尝试注释掉或删除这一行 */
-  margin: 0 auto;    /* 使其在父容器中水平居中，并根据 max-width 调整大小 */
+  margin: 0 auto;     /* 使其在父容器中水平居中，并根据 max-width 调整大小 */
   /* 如果其父元素 .hero-section-peterarendt 不是 flex 容器或者没有 align-items: center，
      则 margin: 0 auto 对于块级元素是标准的居中方法 */
   box-sizing: border-box; /* 确保 padding/border 不会增加 deklarisierter width/max-width */
@@ -420,7 +420,7 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
 }
 .project-item-layout {
   display: flex;
-  align-items: flex;
+  align-items: flex-start; /* Corrected value */
   gap: 50px;
 }
 .featured-project-item:nth-child(odd) .project-item-layout { flex-direction: row; }
@@ -450,10 +450,12 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
   text-align: right;
 }
 .project-title { /* Uses .section-title-main for font, size, color */
+  display: block; /* --- FIX: 确保标题独占一行 --- */
   margin-bottom: 0.4em !important;
   line-height: 1.15 !important;
 }
 .project-subtitle { /* Uses .item-subtitle for font, size, color */
+  display: block; /* --- FIX: 确保副标题在新的一行显示 --- */
   margin-bottom: 2.2em !important;
   color: #b5b5b5 !important;
 }
@@ -519,7 +521,7 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
 .blog-post-summary-content h3 a { color: #ffffff; }
 .blog-post-summary-content h3 a:hover { color: #ffcc00; }
 .blog-post-summary-content p.post-meta { /* font-family 'Inter' from general p or specific class */
-   font-size: 0.85em; color: #aaa; margin-bottom: 10px;
+  font-size: 0.85em; color: #aaa; margin-bottom: 10px;
 }
 .blog-post-summary-content p { /* font-family 'Inter' from general p or specific class */
   font-size: 0.95rem; color: #a0a0a0; line-height: 1.6; margin-bottom: 15px; flex-grow: 1;
@@ -801,6 +803,7 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
 }
 
 .project-detail-subtitle {
+  display: block;
   font-family: 'Inter', sans-serif;
   font-size: 1.1rem;
   color: #a0a0a0;
