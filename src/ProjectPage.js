@@ -17,7 +17,7 @@ const ProjectPage = ({ portfolioData }) => {
     );
   }
 
-  // 优先使用 detailDescription，如果不存在则使用 description
+  // 决定使用哪个描述：优先用 detailDescription，如果没有，则用 description 作为备用
   const descriptionToDisplay = project.detailDescription || project.description;
 
   return (
@@ -40,16 +40,16 @@ const ProjectPage = ({ portfolioData }) => {
       {/* 图片展示区域 */}
       <section className="project-image-gallery">
         {project.detailImages && project.detailImages.map((imageSrc, index) => (
-          // 直接将 motion.img 作为网格项，使用最简单的类名
-          <motion.img 
+          // motion.div 现在是直接的网格项
+          <motion.div 
             key={index}
-            className="gallery-image"
-            src={imageSrc} 
-            alt={`${project.title} - ${index + 1}`} 
+            className="gallery-image-item" // 使用一个简单的新类名
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: index * 0.1 } }}
             viewport={{ once: true, amount: 0.2 }}
-          />
+          >
+            <img src={imageSrc} alt={`${project.title} - ${index + 1}`} />
+          </motion.div>
         ))}
       </section>
     </motion.main>

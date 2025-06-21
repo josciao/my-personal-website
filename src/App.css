@@ -780,94 +780,80 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
 /* (将此代码块添加到您 App.css 的末尾) */
 
 .project-detail-page {
-  /* 页面总容器，设置上下内边距来创造呼吸感 */
   padding-top: 80px;
   padding-bottom: 100px;
 }
 
-/* 文字描述区域的样式 */
 .project-text-section {
-  max-width: 800px; /* 限制文字区域的最大宽度，保证阅读舒适性 */
-  margin: 0 auto 80px auto; /* 上下外边距，左右自动居中。底部80px用于和图片区隔开 */
-  text-align: left;    /* 文本左对齐 */
+  max-width: 800px;
+  margin: 0 auto 80px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  text-align: left;
 }
 
 .project-detail-title {
-  font-family: 'Syne', sans-serif; /* 使用您的标题字体 */
-  font-size: clamp(2.2rem, 5vw, 3.5rem); /* 为详情页标题设置合适的大小 */
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
   font-weight: 700;
   line-height: 1.2;
-  margin-bottom: 0.6em; /* 标题和副标题/正文的间距 */
-  color: #ffffff; /* 保持您的标题颜色 */
+  margin-bottom: 0.6em;
 }
 
 .project-detail-subtitle {
   font-family: 'Inter', sans-serif;
   font-size: 1.1rem;
-  color: #a0a0a0; /* 副标题颜色可以柔和一些 */
-  margin-bottom: 2.5em; /* 与下方正文的间距 */
-  font-style: italic; /* 可选：副标题用斜体 */
+  color: #a0a0a0;
+  margin-bottom: 2.5em;
+  font-style: italic;
 }
 
 .project-text-section p {
-  font-family: 'Inter', sans-serif;
   font-size: 1rem;
-  line-height: 1.8; /* 稍大的行高提升阅读体验 */
+  line-height: 1.8;
   color: #c0c0c0;
-  margin-bottom: 1.5em; /* 段落之间的间距 */
-}
-.project-text-section p:last-child {
-  margin-bottom: 0;
+  margin-bottom: 1.5em;
 }
 
 
-/* 图片展示区域的样式 */
+/* --- 图片展示区域样式 (最简化、最可靠的实现) --- */
 .project-image-gallery {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 创建两列等宽的网格 */
-  gap: 20px; /* 图片之间的间距 */
+  grid-template-columns: repeat(2, 1fr); /* 保持两列等宽 */
+  gap: 20px; /* 图片间距 */
   max-width: 1600px;
   width: 90%;
-  margin: 0 auto; /* 使整个画廊居中 */
-  align-items: start; /* 让不同高度的图片从顶部对齐 */
+  margin: 0 auto;
 }
 
 .gallery-image-item {
   /* 这个 motion.div 现在是网格项，它本身不需要特定样式 */
+  /* 它的尺寸由网格容器 .project-image-gallery 决定 */
 }
 
 .gallery-image-item img {
+  /* 这是实现您需求的最核心、最简单的方式 */
   width: 100%;       /* 图片宽度撑满其所在的网格列 */
   height: auto;      /* 高度自动调整，以保持图片的原始宽高比 */
   display: block;    /* 移除图片下方的额外空隙 */
   border-radius: 4px;/* 可选：美观的圆角 */
 }
 
-/* 为项目详情页添加响应式调整 */
+
+/* --- 详情页响应式调整 --- */
 @media (max-width: 768px) {
-  .project-text-section {
-    max-width: 90%;
-    margin-bottom: 50px;
-  }
-  .project-detail-title {
-    font-size: clamp(2rem, 7vw, 2.8rem); /* 调整标题大小 */
-  }
-  .project-image-gallery {
-    grid-template-columns: 1fr; /* 修改：在小屏幕上变为单列显示 */
-    width: 100%;
-    padding: 0 15px;
-    box-sizing: border-box;
-  }
-  .project-image-wrapper {
-    width: 100%; 
-    padding: 0; /* 在这里不再需要padding */
-  }
   .project-detail-page {
     padding-top: 60px;
   }
   .project-text-section {
     max-width: 90%;
     margin-bottom: 50px;
+  }
+  .project-image-gallery {
+    grid-template-columns: 1fr; /* 在手机上变为单列显示 */
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
   }
 }
 
