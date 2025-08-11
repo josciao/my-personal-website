@@ -959,7 +959,7 @@ section { /* For generic <section> tags if used directly, e.g. for full-width se
   height: 100%;
   
   /* --- 在这里替换成你自己的图片 URL --- */
-  background-image: url('D:\Personal-Website\my-portfolio\src\images\homepage_01.jpg');
+  background-image: url('./images/homepage_01.jpg');
   background-size: cover;
   background-position: center 35%;
   
