@@ -63,7 +63,7 @@ function App() {
           <Route path="/portfolio" element={
             <main className="content-section portfolio">
               <h2 className="section-title">所有作品</h2>
-              <p style={{textAlign: 'center', marginBottom: '30px'}}>这里展示我的所有设计项目和作品。</p>
+              <p style={{textAlign: 'center', marginBottom: '30px'}}></p>
               <div className="portfolio-grid">
                 {portfolioData.map((item) => (
                   <motion.div
